@@ -92,6 +92,7 @@ int main()
 		for (i=0; i<5; i++) myvector.get_allocator().destroy(&p[i]);
 		myvector.get_allocator().deallocate(p,5);
 	}
+	
 	{
 		std::cout << COLOR_TWO << "/--iterator verdadero--/" << COLOR_NO << std::endl;
 		std::vector<int> myvector;
@@ -116,7 +117,8 @@ int main()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 	}
-//	/*
+	
+/*	
 	{
 		std::cout << COLOR_TWO << "/--iterator mio (falta)--/" << COLOR_NO << std::endl;
 		ft::vector<int> myvector;
@@ -141,7 +143,8 @@ int main()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 	}
-//	*/
+*/	
+/*
 	{
 		std::cout << COLOR_TWO << "/--test bool--/" << COLOR_NO << std::endl;
 		ft::vector<int> foo (2,200);   // three ints with a value of 100
@@ -168,6 +171,8 @@ int main()
 		std::cout << "CAPACITY: " << myvector.capacity() << "\n";
 		printf_v(myvector, "myvector");
 	}
+	*/
+	/*
 	{
 		std::cout << COLOR_TWO << "/--Iterator--/" << COLOR_NO << std::endl;
 		ft::vector<int> numbers(6,10);
@@ -189,6 +194,8 @@ int main()
 		for (; it != ult; it++)
 			std::cout << "ft: {" << *it2 << "} ft: {" << *it << "}" << std::endl;
 	}
+	*/
+/*
 	{
 		std::cout << COLOR_TWO << "/--Oper(+=)--/" << COLOR_NO << std::endl;
 		ft::vector<int>	numbers(5, 42);
@@ -225,6 +232,7 @@ int main()
 		std::cout << " it -= 1 {" << *it2 << "}" << std::endl;
 
 	}
+	*/
 	{
 		std::cout << COLOR_TWO << "/--resize--/" << COLOR_NO << std::endl;
 		std::vector<int> bar(3);
