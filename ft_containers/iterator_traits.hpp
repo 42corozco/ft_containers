@@ -1,15 +1,18 @@
-#ifndef ITERATOR_HPP
-# define ITERATOR_HPP
+#ifndef ITERATOR_TRAITS_HPP
+# define ITERATOR_TRAITS_HPP
 
-#include <cstddef>
-#include <iterator>
+# include <cstddef>
+# include <iterator>
 
 namespace ft
 {
+	struct bidirectional_iterator_tag{ };
+	struct random_access_iterator_tag{ };
+
+
 	template< class Iterator >
 	class iterator_traits
 	{
-		public:
 		public:
 		typedef typename Iterator::difference_type   difference_type;
 		typedef typename Iterator::value_type        value_type;
@@ -26,7 +29,7 @@ namespace ft
 		typedef T value_type;
 		typedef T* pointer;
 		typedef T& reference;
-		typedef std::random_access_iterator_tag iterator_category;
+		typedef ft::random_access_iterator_tag iterator_category;
 	};
 
 	template<class T>
@@ -37,10 +40,8 @@ namespace ft
 		typedef T value_type;
 		typedef const T* pointer;
 		typedef const T& reference;
-		typedef std::random_access_iterator_tag iterator_category;
+		typedef ft::random_access_iterator_tag iterator_category;
 	};
-
 };
-
 
 #endif

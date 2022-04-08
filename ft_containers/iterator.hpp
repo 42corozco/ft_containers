@@ -1,7 +1,7 @@
 #ifndef ITERATOR_HPP
 # define ITERATOR_HPP
 
-#include <cstddef> //ptrdiff_t
+#include <cstddef>
 
 namespace ft
 {
@@ -16,8 +16,6 @@ namespace ft
 		typedef Reference reference;
 		typedef Category  iterator_category;
 	};
-
-
 };
 
 #endif
