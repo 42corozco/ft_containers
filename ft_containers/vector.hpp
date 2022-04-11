@@ -14,7 +14,6 @@ namespace ft
 	class vector
 	{
 		public:
-
 		typedef T				value_type;
 		typedef  Allocator		allocator_type;
 		typedef typename allocator_type::reference			reference;
@@ -27,8 +26,8 @@ namespace ft
 		typedef typename ft::random_access_iterator<T>			iterator;
 		typedef typename ft::random_access_iterator<const T>	const_iterator;
 
-		typedef typename ft::reverse_iterator<T>				reverse_iterator;
-		typedef typename ft::reverse_iterator<const T>			const_reverse_iterator;
+		typedef typename ft::reverse_iterator<iterator>				reverse_iterator;
+		typedef typename ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
 
 		/**********MEMBER FUNCTIONS**********/
