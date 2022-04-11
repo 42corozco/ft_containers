@@ -34,8 +34,11 @@ namespace ft
 		~reverse_iterator() {}
 
 		iterator_type base() const { return (this->_ptr); };
-		reference operator*() const { return (reverse_iterator(*--_ptr)); };
-
+		reference operator*() const
+		{
+			Iterator tmp = _ptr;
+			return (*--tmp);
+		};
 		reverse_iterator	operator+ (difference_type n) const { return (reverse_iterator<iterator_type>(_ptr - n)); };
 		reverse_iterator&	operator++() { _ptr--; return (*this); };
 		reverse_iterator	operator++(int) { return (reverse_iterator(this->_ptr--)); };
