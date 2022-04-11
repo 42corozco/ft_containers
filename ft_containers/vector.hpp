@@ -31,6 +31,7 @@ namespace ft
 
 
 		/**********MEMBER FUNCTIONS**********/
+		//default (1)
 		explicit vector (const allocator_type& alloc = allocator_type())
 		{
 			this->tmp = alloc;
@@ -38,7 +39,7 @@ namespace ft
 			this->_size = 0;
 			this->_capacity = 0;
 		}
-
+		// fill (2)	
 		explicit vector (size_type n, const value_type& val = value_type(),
 			const allocator_type& alloc = allocator_type())
 		: tmp(alloc), _size(n), _capacity(n)
@@ -48,11 +49,17 @@ namespace ft
 				this->_tab[i] = val;
 		};
 
+		// range (3)
 		//template <class InputIterator>
         //vector (InputIterator first, InputIterator last,
         //        const allocator_type& alloc = allocator_type());
 
-		//vector (const vector& x);
+		// copy (4)
+		vector (vector<T, Allocator> const & x)
+			: _tab(0), tmp(allocator_type()), _size(0), _capacity(0)
+		{
+			*this = x;
+		};
 
 		~vector()
 		{
@@ -74,14 +81,14 @@ namespace ft
 		}
 
 		/**********ITERATORS**********/
-			iterator begin() { return(iterator(this->_tab)); }
-			const_iterator begin() const { return(const_iterator(this->_tab)); }
-			iterator end() { return(iterator(this->_tab + this->_size)); }
-			const_iterator end() const { return(const_iterator(this->_tab + this->_size)); }
-//			reverse_iterator rbegin() { return(reverse_iterator(this->_tab + this->_size)); }
-//			const_reverse_iterator rbegin() const { return(const_reverse_iterator(this->_tab + this->_size)); }
-//			reverse_iterator rend() { return(reverse_iterator(this->_tab)); }
-//			const_reverse_iterator rend() const { return(const_reverse_iterator(this->_tab)); }
+		iterator begin() { return(iterator(this->_tab)); }
+		const_iterator begin() const { return(const_iterator(this->_tab)); }
+		iterator end() { return(iterator(this->_tab + this->_size)); }
+		const_iterator end() const { return(const_iterator(this->_tab + this->_size)); }
+		reverse_iterator rbegin() { return(reverse_iterator(this->_tab + this->_size)); }
+		const_reverse_iterator rbegin() const { return(const_reverse_iterator(this->_tab + this->_size)); }
+		reverse_iterator rend() { return(reverse_iterator(this->_tab)); }
+		const_reverse_iterator rend() const { return(const_reverse_iterator(this->_tab)); }
 
 		/**********CAPACITY**********/
 		size_type	size() const { return (_size); };
