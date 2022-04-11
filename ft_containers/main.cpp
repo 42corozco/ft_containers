@@ -101,14 +101,14 @@ int main()
 		printf_v(myvector, "v");
 		std::vector<int>::iterator it = myvector.begin();
 		std::vector<int>::iterator at = myvector.end();
-//		std::vector<int>::reverse_iterator itt = myvector.rbegin();
-//		std::vector<int>::reverse_iterator att = myvector.rend();
+		std::vector<int>::reverse_iterator itt = myvector.rbegin();
+		std::vector<int>::reverse_iterator att = myvector.rend();
 
-		//		std::cout << &myvector << std::endl;
+		std::cout << &myvector << std::endl;
 		std::cout << *it << " " << &it << std::endl;
 		std::cout << *at << " " << &at << std::endl;
-//		std::cout << *itt << " " << &itt << std::endl;
-//		std::cout << *att << " " << &att << std::endl;
+		std::cout << *itt << " " << &itt << std::endl;
+		std::cout << *att << " " << &att << std::endl;
 		std::cout << "max_size: " << myvector.max_size() << "\n";
 		std::cout << "size: " << myvector.size() << "\n";
 		std::cout << "capacity: " << myvector.capacity() << "\n";
@@ -117,24 +117,22 @@ int main()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 	}
-	
-/*	
 	{
-		std::cout << COLOR_TWO << "/--iterator mio (falta)--/" << COLOR_NO << std::endl;
+		std::cout << COLOR_TWO << "/--iterator mio--/" << COLOR_NO << std::endl;
 		ft::vector<int> myvector;
 		for (int i=0; i<=10; i++) myvector.push_back(i);
 
 		printf_v(myvector, "v");
 		ft::vector<int>::iterator it = myvector.begin();
 		ft::vector<int>::iterator at = myvector.end();
-//		ft::vector<int>::reverse_iterator itt = myvector.rbegin();
-//		ft::vector<int>::reverse_iterator att = myvector.rend();
+		ft::vector<int>::reverse_iterator itt = myvector.rbegin();
+		ft::vector<int>::reverse_iterator att = myvector.rend();
 
-		//		std::cout << &myvector << std::endl;
+		std::cout << &myvector << std::endl;
 		std::cout << *it << " " << &it << std::endl;
 		std::cout << *at << " " << &at << std::endl;
-//		std::cout << *itt << " " << &itt << std::endl;
-//		std::cout << *att << " " << &att << std::endl;
+		std::cout << *itt << " " << &itt << std::endl;
+		std::cout << *att << " " << &att << std::endl;
 		std::cout << "max_size: " << myvector.max_size() << "\n";
 		std::cout << "size: " << myvector.size() << "\n";
 		std::cout << "capacity: " << myvector.capacity() << "\n";
@@ -143,7 +141,6 @@ int main()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 	}
-*/	
 /*
 	{
 		std::cout << COLOR_TWO << "/--test bool--/" << COLOR_NO << std::endl;
