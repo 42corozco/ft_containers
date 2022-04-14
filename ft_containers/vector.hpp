@@ -53,7 +53,19 @@ namespace ft
 		//template <class InputIterator>
         //vector (InputIterator first, InputIterator last,
         //        const allocator_type& alloc = allocator_type());
-
+	/*	template <class InputIterator>
+		vector(InputIterator first, InputIterator last,
+			const Allocator & alloc = Allocator(), 
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = ft_nullptr_t)
+				: _alloc(alloc), _size_container(0)
+			{
+				difference_type n = ft::distance(first, last);
+				_ptr  = _alloc.allocate(n);
+				_capacity = n;
+				for(;first != last;first++)
+					this->push_back(*first);
+			}
+*/
 		// copy (4)
 		vector (vector<T, Allocator> const & x)
 			: _tab(0), tmp(allocator_type()), _size(0), _capacity(0)
@@ -189,7 +201,7 @@ namespace ft
 			if (this->_size > 0)
 			{
 				this->_size--;
-				this->tmp.destroy(&this->_tab[this->_size]);
+				this->tmp.destroy(this->_tab + this->_size);
 			}
 		}
 
@@ -198,8 +210,30 @@ namespace ft
 		//template <class InputIterator>
 			// void insert (iterator position, InputIterator first, InputIterator last);
 
-		//iterator erase (iterator position);
-		//iterator erase (iterator first, iterator last);
+/*
+		iterator erase (iterator position)
+		{
+			vector	tmp(position + 1, this->end());
+
+			for (size_t i = 0; i < tmp.size(); i++)
+				this->pop_back();
+			this->pop_back();
+			for (iterator it = tmp.begin(); it != tmp.end(); it++)
+				this->push_back(*it);
+			return (position);
+		};
+*/
+		iterator erase (iterator first, iterator last)
+		{
+			iterator tmp(first);
+
+			while (tmp != last)
+			{
+				erase(first);
+				tmp++;
+			}
+			return (first);
+		}
 
 		void swap (vector& x)
 		{
