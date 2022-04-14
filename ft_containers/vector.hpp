@@ -7,6 +7,7 @@
 
 # include "random_access_iterator.hpp"
 # include "reverse_iterator.hpp"
+# include "utils.hpp"
 
 namespace ft
 {
@@ -49,23 +50,33 @@ namespace ft
 				this->_tab[i] = val;
 		};
 
-		// range (3)
-		//template <class InputIterator>
-        //vector (InputIterator first, InputIterator last,
-        //        const allocator_type& alloc = allocator_type());
-	/*	template <class InputIterator>
-		vector(InputIterator first, InputIterator last,
-			const Allocator & alloc = Allocator(), 
-			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = ft_nullptr_t)
-				: _alloc(alloc), _size_container(0)
-			{
-				difference_type n = ft::distance(first, last);
-				_ptr  = _alloc.allocate(n);
-				_capacity = n;
-				for(;first != last;first++)
-					this->push_back(*first);
-			}
+/*
+
+		private:
+		T * _tab;
+		allocator_type tmp;
+		size_type	_size;
+		size_type	_capacity;
+
+
 */
+
+		// range (3)		//https://stackoverflow.com/questions/28529376/stdvector-constructor-taking-pair-of-iterators
+		/*
+		template<class InputIt>
+		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
+		typename ft::enable_if<InputIt::input_iter, InputIt>::type = NULL)
+		std::iterator_traits<InputIterator>::iterator_category>::value
+		: _tab(0), tmp(alloc), _size(0), _capacity(0)
+		{
+			while (first != last)
+			{
+				this->push_back(*first);
+				first++;
+			}
+		};
+*/
+
 		// copy (4)
 		vector (vector<T, Allocator> const & x)
 			: _tab(0), tmp(allocator_type()), _size(0), _capacity(0)
