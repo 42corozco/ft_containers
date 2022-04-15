@@ -52,7 +52,7 @@ namespace ft
 		reverse_iterator&	operator-=(difference_type n) { this->_ptr += n; return(*this);}
 
 		pointer				operator->() const { return (&(this->operator*())); }
-		reference			operator[] (difference_type n) const { return (this->base[n -1]); }
+		reference			operator[] (difference_type n) const { return (this->base()[-n -1]); }
 
 		template <class Iteratorr>
 		friend difference_type operator-(const reverse_iterator<Iteratorr> &lhs, const reverse_iterator<Iteratorr> &rhs);
