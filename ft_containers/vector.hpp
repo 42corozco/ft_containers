@@ -8,6 +8,7 @@
 # include "random_access_iterator.hpp"
 # include "reverse_iterator.hpp"
 # include "utils.hpp"
+# include "is_integral.hpp"
 
 namespace ft
 {
@@ -49,24 +50,12 @@ namespace ft
 			for (unsigned int i = 0; i < n; i++)
 				this->_tab[i] = val;
 		};
-
-/*
-
-		private:
-		T * _tab;
-		allocator_type tmp;
-		size_type	_size;
-		size_type	_capacity;
-
-
-*/
-
 		// range (3)		//https://stackoverflow.com/questions/28529376/stdvector-constructor-taking-pair-of-iterators
-		/*
+		// https://h-deb.clg.qc.ca/Sujets/TrucsScouts/Comprendre_enable_if.html
+		
 		template<class InputIt>
 		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
-		typename ft::enable_if<InputIt::input_iter, InputIt>::type = NULL)
-		std::iterator_traits<InputIterator>::iterator_category>::value
+		typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL)
 		: _tab(0), tmp(alloc), _size(0), _capacity(0)
 		{
 			while (first != last)
@@ -75,7 +64,6 @@ namespace ft
 				first++;
 			}
 		};
-*/
 
 		// copy (4)
 		vector (vector<T, Allocator> const & x)
@@ -168,8 +156,14 @@ namespace ft
 		const_reference back() const { return (*(this->_tab + this->_size - 1)); }
 
 		/**********MODIFIERS**********/
-		//template <class InputIterator>
-			//void assign (InputIterator first, InputIterator last);
+		template<class InputIterator>
+		void assign(InputIterator first, InputIterator last,
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+		{
+			this->clear();
+			for (iterator it = first; it != last; it++)
+					this->push_back(*it);
+		};
 
 		void assign (size_type n, const value_type& val)
 		{
@@ -217,11 +211,13 @@ namespace ft
 		}
 
 		//iterator insert (iterator position, const value_type& val);
-		//void insert (iterator position, size_type n, const value_type& val);
-		//template <class InputIterator>
-			// void insert (iterator position, InputIterator first, InputIterator last);
 
-/*
+		//void insert (iterator position, size_type n, const value_type& val);
+
+		//template <class InputIterator>
+		// void insert (iterator position, InputIterator first, InputIterator last);
+
+
 		iterator erase (iterator position)
 		{
 			vector	tmp(position + 1, this->end());
@@ -233,7 +229,7 @@ namespace ft
 				this->push_back(*it);
 			return (position);
 		};
-*/
+
 		iterator erase (iterator first, iterator last)
 		{
 			iterator tmp(first);
