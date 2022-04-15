@@ -200,7 +200,6 @@ int main()
 		for (; it != ult; itt++, (void)itt2++)
 			std::cout << "ft: {" << *itt2 << "} ft: {" << *itt << "}" << std::endl;
 	}
-/*
 	{
 		std::cout << COLOR_TWO << "/--Oper(+=)--/" << COLOR_NO << std::endl;
 		ft::vector<int>	numbers(5, 42);
@@ -237,7 +236,6 @@ int main()
 		std::cout << " it -= 1 {" << *it2 << "}" << std::endl;
 
 	}
-	*/
 	{
 		std::cout << COLOR_TWO << "/--resize--/" << COLOR_NO << std::endl;
 		std::vector<int> bar(3);
@@ -299,24 +297,24 @@ int main()
 		}
 	}
 	{
-		std::cout << COLOR_TWO << "/--assign(falta)--/" << COLOR_NO << std::endl;
+		std::cout << COLOR_TWO << "/--assign--/" << COLOR_NO << std::endl;
 		ft::vector<int> first;
-//		ft::vector<int> second;
-		//		ft::vector<int> third;
+		ft::vector<int> second;
+		ft::vector<int> third;
 
 		first.assign (7,100);             // 7 ints with a value of 100
 
-//		ft::vector<int>::iterator it;
-//		it=first.begin()+1;
+		ft::vector<int>::iterator it;
+		it=first.begin()+1;
 
-//		second.assign (it,first.end()-1); // the 5 central values of first
+		second.assign (it,first.end()-1); // the 5 central values of first
 
-		//		int myints[] = {1776,7,4};
-		//		third.assign(myints,myints+3);   // assigning from array.
+		int myints[] = {1776,7,4};
+		third.assign(myints,myints+3);   // assigning from array.
 
 		std::cout << "Size of first: " << int (first.size()) << '\n';
-//		std::cout << "Size of second: " << int (second.size()) << '\n';
-		//		std::cout << "Size of third: " << int (third.size()) << '\n';
+		std::cout << "Size of second: " << int (second.size()) << '\n';
+		std::cout << "Size of third: " << int (third.size()) << '\n';
 
 	}
 	{
@@ -352,7 +350,6 @@ int main()
 		myvector.front() -= myvector.back();
 		std::cout << "myvector.front() is now " << myvector.front() << '\n';
 	}
-	/*
 	{
 		std::cout << COLOR_TWO << "/--Erase--/" << COLOR_NO << std::endl;
 		ft::vector<int> myvector;
@@ -377,7 +374,6 @@ int main()
 		myvector.erase (myvector.begin(), myvector.begin()+3);
 		printf_v(myvector, "ft ");
 	}
-	*/
 	{
 		std::cout << COLOR_ONE<< "/--swap--/" << COLOR_NO << std::endl;
 		// vector container declaration
