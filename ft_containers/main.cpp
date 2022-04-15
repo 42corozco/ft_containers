@@ -141,7 +141,6 @@ int main()
 			std::cout << ' ' << *it;
 		std::cout << '\n';
 	}
-/*
 	{
 		std::cout << COLOR_TWO << "/--test bool--/" << COLOR_NO << std::endl;
 		ft::vector<int> foo (2,200);   // three ints with a value of 100
@@ -157,41 +156,50 @@ int main()
 	{
 		std::cout << COLOR_TWO << "/--Clear--/" << COLOR_NO << std::endl;
 		ft::vector<int> myvector(7,400);
-		//		std::vector<int> myvector(7,400);
-		std::cout << "SIZE: " << myvector.size() << "\n";
-		std::cout << "CAPACITY: " << myvector.capacity() << "\n";
-		printf_v(myvector, "myvector");
+		std::vector<int> stdvector(7,400);
+		std::cout << "ft  - SIZE: " << myvector.size() << "\n";
+		std::cout << "std - SIZE: " << stdvector.size() << "\n";
+		std::cout << "ft  - CAPACITY: " << myvector.capacity() << "\n";
+		std::cout << "std - CAPACITY: " << stdvector.capacity() << "\n";
+		printf_v(myvector, "ft ");
+		printf_v(stdvector, "std");
 		myvector.clear();
 		myvector.push_back (1101);
 		myvector.push_back (2202);
-		std::cout << "SIZE: " << myvector.size() << "\n";
-		std::cout << "CAPACITY: " << myvector.capacity() << "\n";
-		printf_v(myvector, "myvector");
+		stdvector.clear();
+		stdvector.push_back (1101);
+		stdvector.push_back (2202);
+		std::cout << "ft  - SIZE: " << myvector.size() << "\n";
+		std::cout << "std - SIZE: " << stdvector.size() << "\n";
+		std::cout << "ft  - CAPACITY: " << myvector.capacity() << "\n";
+		std::cout << "std - CAPACITY: " << stdvector.capacity() << "\n";
+		printf_v(myvector, "ft ");
+		printf_v(stdvector, "std");
 	}
-	*/
-	/*
 	{
 		std::cout << COLOR_TWO << "/--Iterator--/" << COLOR_NO << std::endl;
 		ft::vector<int> numbers(6,10);
 		std::vector<int> numbers2(6,10);
 
-
 		printf_v(numbers, "ft ");
 		printf_v(numbers2, "std");
 
 		ft::vector<int>::iterator it = numbers.begin();
+		ft::vector<int>::iterator itt = numbers.begin();
 		std::vector<int>::iterator it2 = numbers2.begin();
+		std::vector<int>::iterator itt2 = numbers2.begin();
+
 		ft::vector<int>::iterator ult = numbers.end();
 		std::vector<int>::iterator ult2 = numbers2.end();
 
-		std::cout << *it << std::endl;
-		std::cout << *it2 << std::endl;
-		for (; it2 != ult2; it2++) //real
+		std::cout << "printf{ *it : ft } :" << *it << std::endl;
+		std::cout << "printf{ *it :std } :"<< *it2 << std::endl;
+
+		for (; it2 != ult2; it2++, (void)it++) //real
 			std::cout << "std: {" << *it2 << "} ft: {" << *it << "}" << std::endl;
-		for (; it != ult; it++)
-			std::cout << "ft: {" << *it2 << "} ft: {" << *it << "}" << std::endl;
+		for (; it != ult; itt++, (void)itt2++)
+			std::cout << "ft: {" << *itt2 << "} ft: {" << *itt << "}" << std::endl;
 	}
-	*/
 /*
 	{
 		std::cout << COLOR_TWO << "/--Oper(+=)--/" << COLOR_NO << std::endl;
