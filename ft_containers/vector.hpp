@@ -50,8 +50,9 @@ namespace ft
 			for (unsigned int i = 0; i < n; i++)
 				this->_tab[i] = val;
 		};
-		// range (3)		//https://stackoverflow.com/questions/28529376/stdvector-constructor-taking-pair-of-iterators
-		// https://h-deb.clg.qc.ca/Sujets/TrucsScouts/Comprendre_enable_if.html
+		// range (3)
+		//	->	https://stackoverflow.com/questions/28529376/stdvector-constructor-taking-pair-of-iterators
+		//	->	https://h-deb.clg.qc.ca/Sujets/TrucsScouts/Comprendre_enable_if.html
 		
 		template<class InputIt>
 		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
@@ -285,6 +286,35 @@ namespace ft
 			return (std::out_of_range(o.str()));
 		};
 	};
+
+	/**********Non-member functions**********/
+	//	->	https://www.cplusplus.com/reference/vector/vector/operators/
+
+	template <class T, class Alloc>
+	bool operator==(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc> &rhs) {
+		return (lhs.size() == rhs.size() && ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+	}
+
+	template <class T, class Alloc>
+	bool operator!=(const ft::vector<T, Alloc>& lhs, const ft::vector<T, Alloc> &rhs) { return (!(lhs == rhs)); }
+
+	template <class T, class Alloc>
+	bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
+		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end()));
+	}
+
+	template <class T, class Alloc>
+	bool operator<=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) { return (!(rhs < lhs)); }
+
+	template <class T, class Alloc>
+	bool operator>(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) { return (rhs < lhs); }
+
+	template <class T, class Alloc>
+	bool operator>=(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) { return (!(lhs < rhs)); }
+
+	template <class T, class Alloc>
+	void swap(vector<T, Alloc> &x, vector<T, Alloc> &y) { x.swap(y); }
+
 };
 
 #endif
