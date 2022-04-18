@@ -48,7 +48,10 @@ namespace ft
 		{
 			this->_tab = this->tmp.allocate(n);
 			for (unsigned int i = 0; i < n; i++)
-				this->_tab[i] = val;
+			{
+				tmp.construct(&_tab[i], val);
+				//this->_tab[i] = val;
+			}
 		};
 		// range (3)
 		//	->	https://stackoverflow.com/questions/28529376/stdvector-constructor-taking-pair-of-iterators
@@ -198,7 +201,9 @@ namespace ft
 			}
 			if (this->_size == this->_capacity)
 				reserve(this->_capacity * 2);
-			this->_tab[this->_size] = val;
+			tmp.construct(&this->_tab[this->_size], val);
+
+			//this->_tab[this->_size] = val;
 			this->_size++;
 		}
 
