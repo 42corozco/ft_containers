@@ -37,7 +37,7 @@ namespace ft
 		explicit vector (const allocator_type& alloc = allocator_type())
 		{
 			this->tmp = alloc;
-			this->_tab = this->tmp.allocate(0);
+			this->_tab = 0;
 			this->_size = 0;
 			this->_capacity = 0;
 		}
@@ -71,27 +71,36 @@ namespace ft
 
 		// copy (4)
 		vector (vector<T, Allocator> const & x)
-			: _tab(0), tmp(allocator_type()), _size(0), _capacity(0)
+			: _tab(0), tmp(x.tmp), _size(0), _capacity(0)
 		{
 			*this = x;
 		};
 
 		~vector()
 		{
-			//detroy?
-			this->tmp.deallocate(this->_tab, this->_size);
+			if (this->_tab)
+			{
+				clear();
+				if (this->_capacity)
+					this->tmp.deallocate(this->_tab, this->_capacity);
+			}
 		}
 
 		vector& operator= (const vector& obj)
 		{
 			if (this->_tab)
-				this->tmp.deallocate(this->_tab, this->_size);
-			this->tmp = obj.tmp;
-			this->_size = obj._size;
-			this->_capacity = obj._capacity;
-			this->_tab = this->tmp.allocate(this->_size);
-			for (unsigned int i = 0; i < this->_size ;i++)
-				this->_tab[i] = obj._tab[i];
+				clear();
+
+			if (obj.size() > this->_capacity)
+			{
+				this->tmp.deallocate(this->_tab, this->_capacity);
+				this->_tab = tmp.allocate(obj.size());
+				this->_capacity = obj.size();
+			}
+
+			for (unsigned int i = 0; i < obj._size ;i++)
+				push_back(obj[i]);
+
 			return (*this);
 		}
 
@@ -111,6 +120,7 @@ namespace ft
 		void resize (size_type n, value_type val = value_type())
 		{
 			value_type	*newtab;                               //meter assing(2)(punteros) que servira /-
+
 			unsigned int	osize = this->_size;
 				if (this->_capacity < n)									//n
 				this->_capacity = n;									//n
@@ -120,7 +130,9 @@ namespace ft
 				newtab[i] = val;										//n
 			for (unsigned int i = 0; i < osize && i < this->_capacity; i++)
 				newtab[i] = this->_tab[i];
-			this->tmp.deallocate(this->_tab, this->_size);				//n
+			for (unsigned int i = 0; i < osize && i < this->_size; i++)
+				tmp.destroy(&_tab[i]);
+			this->tmp.deallocate(this->_tab, this->_capacity);				//n
 			this->_tab = newtab;										//n
 		}
 		size_type	capacity() const { return (_capacity); }
@@ -133,8 +145,14 @@ namespace ft
 				return ;
 			newtab = this->tmp.allocate(n);
 			for (unsigned int i = 0; i < this->_size; i++)
-				newtab[i] = this->_tab[i];
-			this->tmp.deallocate(this->_tab, this->_size);
+			{
+				tmp.construct(&newtab[i], this->_tab[i]);
+			}
+			for (unsigned int i = 0; i < this->_size; i++)
+			{
+				this->tmp.destroy(&this->_tab[i]);
+			}
+			this->tmp.deallocate(this->_tab, this->_capacity);
 			this->_tab = newtab;
 			this->_capacity = n;
 		}
@@ -181,7 +199,9 @@ namespace ft
 			{
 				value_type	*newtab;
 
-				this->tmp.deallocate(this->_tab, this->_size);
+				for (unsigned int i = 0; i < this->_size ; i++)
+					this->tmp.destroy(&this->_tab[i]);
+				this->tmp.deallocate(this->_tab, this->_capacity);
 				this->_capacity = n;
 				this->_size = n;
 				newtab = this->tmp.allocate(this->_capacity);
@@ -202,8 +222,6 @@ namespace ft
 			if (this->_size == this->_capacity)
 				reserve(this->_capacity * 2);
 			tmp.construct(&this->_tab[this->_size], val);
-
-			//this->_tab[this->_size] = val;
 			this->_size++;
 		}
 
@@ -259,7 +277,6 @@ namespace ft
 			x.tmp = this->tmp;
 			x._size = this->_size;
 			x._capacity = this->_capacity;
-
 			this->_tab = tmp_tab;
 			this->tmp = tmp_tmp;
 			this->_size = tmp_size;
@@ -268,7 +285,8 @@ namespace ft
 
 		void clear()
 		{
-			for (unsigned int i = 0 ; i < this->_size ; i++)
+			//for (unsigned int i = 0 ; i < this->_size ; i++)
+			for (int i = (int)this->_size-1 ; i >= 0 ; i--)
 				this->tmp.destroy(&this->_tab[i]);
 			this->_size = 0;
 		}

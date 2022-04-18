@@ -374,7 +374,7 @@ int main()
 		myvector.erase (myvector.begin(), myvector.begin()+3);
 		printf_v(myvector, "ft ");
 	}
-	{
+/*	{
 		std::cout << COLOR_ONE<< "/--swap--/" << COLOR_NO << std::endl;
 		// vector container declaration
 		ft::vector<int> myvector1;
@@ -392,6 +392,34 @@ int main()
 		// printing the second vector
 		printf_v(myvector2, "swap2:");
 		return 0;
+	}
+*/
+	{
+		std::cout << COLOR_ONE<< "/--intento--/" << COLOR_NO << std::endl;
+		ft::vector<std::string> vct(8);
+		ft::vector<std::string> vct2;
+		ft::vector<std::string>::iterator it = vct.begin();
+
+		for (unsigned long int i = 0; i < vct.size(); ++i)
+			it[i] = std::string((vct.size() - i), i + 65);
+		printf_v(vct, "nani ");
+		//printSize(vct, true);
+
+		std::cout << "push_back():\n" << std::endl;
+
+		vct.push_back("One long string");
+		vct2.push_back("Another long string");
+
+		printf_v(vct, "vct");
+		printf_v(vct2, "vct2");
+
+		vct.pop_back();
+		vct2.pop_back();
+
+
+		printf_v(vct, "vct");
+		printf_v(vct2, "vct2");
+		return (0);
 	}
 	return (0);
 }
