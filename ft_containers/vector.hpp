@@ -179,16 +179,21 @@ namespace ft
 
 		/**********MODIFIERS**********/
 		template<class InputIterator>
-		void assign(InputIterator first, InputIterator last,
-		typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type* = NULL)
+		void	assign(InputIterator first, typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type last)
 		{
-			this->clear();
-			for (iterator it = first; it != last; it++)
-					this->push_back(*it);
-		};
+			if (size() != 0)
+				clear();
+			for (; first != last; first++)
+					push_back(*first);
+		}
 
 		void assign (size_type n, const value_type& val)
 		{
+			if (size() != 0)
+				clear();
+			while (size() < n)
+				push_back(val);
+		/*
 			if (n <= this->_capacity)
 			{
 				this->_size = n;
@@ -209,7 +214,8 @@ namespace ft
 					newtab[i] = val;
 				this->_tab = newtab;
 			}
-		}
+		*/
+}
 
 		void push_back (const value_type& val)
 		{
@@ -234,12 +240,62 @@ namespace ft
 			}
 		}
 
-		//iterator insert (iterator position, const value_type& val);
+		iterator insert (iterator position, const value_type& val)
+		{
+			difference_type index = position - begin();
+			insert(position, 1, val);
+			return begin() + index;
+		}
 
-		//void insert (iterator position, size_type n, const value_type& val);
+		void insert (iterator position, size_type n, const value_type& val)
+		{
+			difference_type		int_pos = position - this->begin();
 
-		//template <class InputIterator>
-		// void insert (iterator position, InputIterator first, InputIterator last);
+			if (_capacity - _size < n)
+				reserve(n);
+
+			vector		temp(this->begin() + int_pos, this->end());
+
+			for (size_t i = 0; i < temp.size(); i++)
+				this->pop_back();
+			while (n > 0)
+			{
+				this->push_back(val);
+				n--;
+			}
+			for (iterator it = temp.begin(); it != temp.end(); it++)
+				this->push_back(*it);
+		}
+
+		template <class InputIterator>
+		void insert (iterator position, InputIterator first, InputIterator last,
+			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = NULL)
+		{
+			size_t				count = 0;
+			difference_type		int_pos = position - this->begin();
+
+			while (first != last)
+			{
+				first++;
+				count++;
+			}
+			first -= count;
+
+			if (this->_capacity - this->_size < count)
+				reserve(count);
+
+			vector		temp(this->begin() + int_pos, this->end());
+
+			for (size_t i = 0; i < temp.size(); i++)
+				this->pop_back();
+			while (first != last)
+			{
+				this->push_back(*first);
+				first++;
+			}
+			for (iterator it = temp.begin(); it != temp.end(); it++)
+				this->push_back(*it);
+		}
 
 
 		iterator erase (iterator position)
