@@ -271,30 +271,19 @@ namespace ft
 		void insert (iterator position, InputIterator first, InputIterator last,
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = NULL)
 		{
-			size_t				count = 0;
 			difference_type		int_pos = position - this->begin();
+			difference_type		end_inx = this->end() - this->begin();
+			iterator			old_end;
+			iterator			end;
 
+			this->resize(this->_size + (this->len_iterator(first, last)));
+			end = this->end();
+			position = this->begin() + int_pos;
+			old_end = this->begin() + end_inx;
+			while (old_end != position)
+				*--end = *--old_end;
 			while (first != last)
-			{
-				first++;
-				count++;
-			}
-			first -= count;
-
-			if (this->_capacity - this->_size < count)
-				reserve(count);
-
-			vector		temp(this->begin() + int_pos, this->end());
-
-			for (size_t i = 0; i < temp.size(); i++)
-				this->pop_back();
-			while (first != last)
-			{
-				this->push_back(*first);
-				first++;
-			}
-			for (iterator it = temp.begin(); it != temp.end(); it++)
-				this->push_back(*it);
+				*position++ = *first++;
 		}
 
 
@@ -364,6 +353,19 @@ namespace ft
 			<< " >= this->size() (which is " << this->_size << ")";
 			return (std::out_of_range(o.str()));
 		};
+		
+		template <class Iterator>
+		size_t	len_iterator(Iterator first, Iterator last)
+		{
+			size_t	i = 0;
+
+			while (first != last)
+			{
+				++first;
+				++i;
+			}
+			return (i);
+		}
 	};
 
 	/**********Non-member functions**********/
