@@ -27,7 +27,7 @@ namespace ft
 		template <class Iter>
 		reverse_iterator & operator=(reverse_iterator<Iter> const &src)
 		{
-			_ptr = src.base();
+			this->_ptr = src.base();
 			return (*this);
 		};
 
@@ -36,17 +36,17 @@ namespace ft
 		iterator_type base() const { return (this->_ptr); };
 		reference operator*() const
 		{
-			Iterator tmp = _ptr;
+			Iterator tmp = this->_ptr;
 			return (*--tmp);
 		};
-		reverse_iterator	operator+ (difference_type n) const { return (reverse_iterator<iterator_type>(_ptr - n)); };
-		reverse_iterator&	operator++() { _ptr--; return (*this); };
+		reverse_iterator	operator+ (difference_type n) const { return (reverse_iterator<iterator_type>(this->_ptr - n)); };
+		reverse_iterator&	operator++() { this->_ptr--; return (*this); };
 		reverse_iterator	operator++(int) { return (reverse_iterator(this->_ptr--)); };
 
 		reverse_iterator&	operator+=(difference_type n) { this->_ptr -= n; return(*this);}
 
-		reverse_iterator	operator- (difference_type n) const { return (reverse_iterator<iterator_type>(_ptr + n)); }; 
-		reverse_iterator&	operator--() { _ptr++; return (*this); };
+		reverse_iterator	operator- (difference_type n) const { return (reverse_iterator<iterator_type>(this->_ptr + n)); }; 
+		reverse_iterator&	operator--() { this->_ptr++; return (*this); };
 		reverse_iterator	operator--(int) { return (reverse_iterator(this->_ptr++)); };
 
 		reverse_iterator&	operator-=(difference_type n) { this->_ptr += n; return(*this);}
