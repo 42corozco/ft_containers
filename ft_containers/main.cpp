@@ -374,7 +374,7 @@ int main()
 		myvector.erase (myvector.begin(), myvector.begin()+3);
 		printf_v(myvector, "ft ");
 	}
-/*	{
+	{
 		std::cout << COLOR_ONE<< "/--swap--/" << COLOR_NO << std::endl;
 		// vector container declaration
 		ft::vector<int> myvector1;
@@ -391,9 +391,7 @@ int main()
 		printf_v(myvector1, "swap1:");
 		// printing the second vector
 		printf_v(myvector2, "swap2:");
-		return 0;
 	}
-*/
 	{
 		std::cout << COLOR_ONE<< "/--intento--/" << COLOR_NO << std::endl;
 		ft::vector<std::string> vct(8);
@@ -419,7 +417,6 @@ int main()
 
 		printf_v(vct, "vct");
 		printf_v(vct2, "vct2");
-		return (0);
 	}
 	return (0);
 }
