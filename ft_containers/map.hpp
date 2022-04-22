@@ -1,6 +1,14 @@
 #ifndef MAP_HPP
 # define MAP_HPP
 
+# include <cstring>
+# include <functional>
+# include <memory>
+
+// doc
+// -> https://www.lirmm.fr/~ducour/Doc-objets/ISO+IEC+14882-1998.pdf
+// -> https://www.programiz.com/dsa/red-black-tree
+
 namespace	ft
 {
 	template<class Key, class T, class Compare = std::less<Key>,
@@ -8,7 +16,6 @@ namespace	ft
 	class map
 	{
 		public:
-
 		/***********************************************************************************************************************/
 		/** Member_types **/
 		/***********************************************************************************************************************/
@@ -24,8 +31,8 @@ namespace	ft
 		typedef typename allocator_type::const_pointer		const_pointer;
 
 /*
-		typedef typename ft::bidirectional_iterator<T>			iterator;
-		typedef typename ft::bidirectional_iterator<const T>	const_iterator;
+		typedef typename ft::bidirectional_iterator<value_type, node_type>				iterator;
+		typedef typename ft::bidirectional_iterator<const value_type, const node_type>	const_iterator;
 
 		typedef typename ft::reverse_iterator<iterator>			reverse_iterator;       // il faut le faire? 
 		typedef typename ft::reverse_iterator<const_iterator>	const_reverse_iterator; // il faut le faire? 
@@ -48,7 +55,6 @@ namespace	ft
 			bool operator()(const value_type& x, const value_type& y) const { return comp(x.first, y.first); }
 		};
 */
-
 
 		/***********************************************************************************************************************/
 		/** Member_functions **/
@@ -137,26 +143,18 @@ namespace	ft
 
 		/*(pair - single element(1))*/
 //		pair<iterator, bool> insert(const value_type& x);
-		/*-------------------------------------------------------------------*/
 
 		/*(insert - with hint(2))*/
 //		iterator	insert(iterator position, const value_type& x);
-		/*-------------------------------------------------------------------*/
 
 		/*(insert - range(3))*/
 //		template <class InputIterator>
 //		void		insert(InputIterator first, InputIterator last);
 		/*-------------------------------------------------------------------*/
 
-		/*(erase(1))*/
+		/*(erase)*/
 //		void		erase(iterator position);
-		/*-------------------------------------------------------------------*/
-
-		/*(erase(2))*/
 //		size_type	erase(const key_type& x);
-		/*-------------------------------------------------------------------*/
-
-		/*(erase(3))*/
 //		void		erase(iterator first, iterator last);
 		/*-------------------------------------------------------------------*/
 
@@ -168,15 +166,89 @@ namespace	ft
 //		void		clear();
 
 
-// https://www.lirmm.fr/~ducour/Doc-objets/ISO+IEC+14882-1998.pdf
-//			-> page 491 falta aun.
+		/***********************************************************************************************************************/
+		/** Observers  **/
+		/***********************************************************************************************************************/
+
+		/*(key_comp)*/
+		// key_compare				key_comp() const;
+		/*-------------------------------------------------------------------*/
+
+		/*(value_comp)*/
+		// value_compare			value_comp() const;
 
 
+		/***********************************************************************************************************************/
+		/** Map operations  **/
+		/***********************************************************************************************************************/
+
+		/*(find)*/
+		// iterator			find(const key_type& x);
+		// const_iterator		find(const key_type& x) const;
+		/*-------------------------------------------------------------------*/
+
+		/*(count)*/
+		// size_type			count(const key_type& x) const;
+		/*-------------------------------------------------------------------*/
+
+		/*(lower_bound)*/
+		// iterator			lower_bound(const key_type& x);
+		// const_iterator		lower_bound(const key_type& x) const;
+		/*-------------------------------------------------------------------*/
+
+		/*(upper_bound)*/
+		// iterator			upper_bound(const key_type& x);
+		// const_iterator		upper_bound(const key_type& x) const;
+		/*-------------------------------------------------------------------*/
+
+		/*(equal_range (1))*/
+//		pair<iterator,iterator>
+//		equal_range(const key_type& x);
+
+		/*(equal_range (2))*/
+//		pair<const_iterator,const_iterator>
+//		equal_range(const key_type& x) const;
+
+		/***********************************************************************************************************************/
+		/** get_allocator  **/
+		/***********************************************************************************************************************/
+
+		allocator_type get_allocator() const { return (_alloc); };
 
 
 		private:
+		allocator_type	_alloc;
 	}
+/*
+	template <class Key, class T, class Compare, class Allocator>
+	bool operator==(const map<Key,T,Compare,Allocator>& x,
+	const map<Key,T,Compare,Allocator>& y);
 
+	template <class Key, class T, class Compare, class Allocator>
+	bool operator< (const map<Key,T,Compare,Allocator>& x,
+	const map<Key,T,Compare,Allocator>& y);
+
+	template <class Key, class T, class Compare, class Allocator>
+	bool operator!=(const map<Key,T,Compare,Allocator>& x,
+	const map<Key,T,Compare,Allocator>& y);
+
+	template <class Key, class T, class Compare, class Allocator>
+	bool operator> (const map<Key,T,Compare,Allocator>& x,
+	const map<Key,T,Compare,Allocator>& y);
+
+	template <class Key, class T, class Compare, class Allocator>
+	bool operator>=(const map<Key,T,Compare,Allocator>& x,
+	const map<Key,T,Compare,Allocator>& y);
+
+	template <class Key, class T, class Compare, class Allocator>
+	bool operator<=(const map<Key,T,Compare,Allocator>& x,
+	const map<Key,T,Compare,Allocator>& y);
+
+	// specialized algorithms:
+	template <class Key, class T, class Compare, class Allocator>
+	void swap(map<Key,T,Compare,Allocator>& x,
+	map<Key,T,Compare,Allocator>& y);
+*/
 };
 
 #endif
