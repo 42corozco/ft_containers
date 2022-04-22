@@ -116,7 +116,7 @@ namespace ft
 
 		/**********CAPACITY**********/
 		size_type	size() const { return (_size); };
-		size_type	max_size() const { return (size_t(-1) / sizeof(T)); }
+		size_type	max_size() const { return (tmp.max_size()); }
 		void resize (size_type n, value_type val = value_type())
 		{
 			value_type	*newtab;                               //meter assing(2)(punteros) que servira /-
