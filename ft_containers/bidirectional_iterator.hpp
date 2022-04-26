@@ -34,9 +34,10 @@ namespace ft
 
 		bidirectional_iterator(_nodePtr ptr, _nodePtr root, _nodePtr nill):_ptr(ptr), _root(root), _nill(nill) {}
 
+		// si se intenta copiar un const_iterator basado en un iterador
 		operator	bidirectional_iterator<const value_type, const _nodeType>()const
 		{
-			return (bidirectional_iterator<const value_type, const _nodeType>(_ptr, _root, _nill));
+			return (bidirectional_iterator<const value_type, const _nodeType>(this->_ptr, this->_root, this->_nill));
 		}
 		
 		bidirectional_iterator	&operator=(bidirectional_iterator const &cpy)
@@ -76,6 +77,7 @@ namespace ft
 		_nodePtr	_nill;
 
 	};
+	// faltan otros operadores (por si toca mirar diferentes clases)
 }
 
 #endif
