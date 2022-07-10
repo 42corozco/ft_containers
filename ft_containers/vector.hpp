@@ -117,23 +117,25 @@ namespace ft
 		/**********CAPACITY**********/
 		size_type	size() const { return (_size); };
 		size_type	max_size() const { return (tmp.max_size()); }
-		void resize (size_type n, value_type val = value_type())
-		{
-			value_type	*newtab;                               //meter assing(2)(punteros) que servira /-
+		void resize (size_type n, T val = value_type()) {
+			if (n < this->_size)
+			{
+				while (n < this->_size)
+					this->tmp.destroy(&this->_tab[--this->_size]);
+			}
+			else
+			{
+				size_type const &oldsize = this->_size;
 
-			unsigned int	osize = this->_size;
-				if (this->_capacity < n)									//n
-				this->_capacity = n;									//n
-			this->_size = n;											//n
-				newtab = this->tmp.allocate(this->_capacity);				//n
-			for (unsigned int i = 0; i < this->_size; i++)				//n
-				newtab[i] = val;										//n
-			for (unsigned int i = 0; i < osize && i < this->_capacity; i++)
-				newtab[i] = this->_tab[i];
-			for (unsigned int i = 0; i < osize && i < this->_size; i++)
-				tmp.destroy(&_tab[i]);
-			this->tmp.deallocate(this->_tab, this->_capacity);				//n
-			this->_tab = newtab;										//n
+				if (n <= this->_capacity)
+					;
+				else if (n <= oldsize * 2)
+					this->reserve(oldsize * 2);
+				else
+					this->reserve(n);
+				while (this->_size < n)
+					this->tmp.construct(&this->_tab[this->_size++], val);
+				}
 		}
 		size_type	capacity() const { return (_capacity); }
 		bool empty() const { return (_size == 0); }
