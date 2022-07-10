@@ -62,11 +62,7 @@ namespace ft
 		typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL)
 		: _tab(0), tmp(alloc), _size(0), _capacity(0)
 		{
-			while (first != last)
-			{
-				this->push_back(*first);
-				first++;
-			}
+			assign(first, last);
 		};
 
 		// copy (4)
@@ -187,8 +183,7 @@ namespace ft
 		{
 			if (size() != 0)
 				clear();
-			for (; first != last; first++)
-					push_back(*first);
+			insert(begin(), first, last);
 		}
 
 		void assign (size_type n, const value_type& val)
@@ -197,29 +192,7 @@ namespace ft
 				clear();
 			while (size() < n)
 				push_back(val);
-		/*
-			if (n <= this->_capacity)
-			{
-				this->_size = n;
-				for (unsigned int i = 0; i < this->_size ; i++)
-					this->_tab[i] = val;
-			}
-			else
-			{
-				value_type	*newtab;
-
-				for (unsigned int i = 0; i < this->_size ; i++)
-					this->tmp.destroy(&this->_tab[i]);
-				this->tmp.deallocate(this->_tab, this->_capacity);
-				this->_capacity = n;
-				this->_size = n;
-				newtab = this->tmp.allocate(this->_capacity);
-				for (unsigned int i = 0; i < this->_size; i++)
-					newtab[i] = val;
-				this->_tab = newtab;
-			}
-		*/
-}
+		}
 
 		void push_back (const value_type& val)
 		{
@@ -251,43 +224,60 @@ namespace ft
 			return begin() + index;
 		}
 
-		void insert (iterator position, size_type n, const value_type& val)
+		void	insert(iterator position, size_t n, const T &val)
 		{
-			difference_type		int_pos = position - this->begin();
+			difference_type		len = position - this->begin();
 
-			if (_capacity - _size < n)
-				reserve(n);
-
-			vector		temp(this->begin() + int_pos, this->end());
-
-			for (size_t i = 0; i < temp.size(); i++)
-				this->pop_back();
-			while (n > 0)
+			if (_size + n > _capacity)
 			{
-				this->push_back(val);
-				n--;
+				if (_size + n > _capacity * 2)
+					this->reserve(_size + n);
+				else if (_size > 0){
+					if (_size == 0)
+						reserve(n);
+					this->reserve(_size * 2);
+				}
+				else
+					this->reserve(1);
 			}
-			for (iterator it = temp.begin(); it != temp.end(); it++)
-				this->push_back(*it);
+
+			for (size_type i = 0 ; i < n ; i++)
+				tmp.construct(_tab + _size + i, val);
+			for (int i = _size - 1 ; i >= 0 && i >= (int)len ; i--)
+				_tab[i + n] = _tab[i];
+			for (size_type i = len ; i < len + n ; i++)
+				_tab[i] = val;
+			_size = _size + n;
 		}
+
 
 		template <class InputIterator>
 		void insert (iterator position, InputIterator first, InputIterator last,
 			typename ft::enable_if<!ft::is_integral<InputIterator>::value, InputIterator>::type * = NULL)
 		{
-			difference_type		int_pos = position - this->begin();
-			difference_type		end_inx = this->end() - this->begin();
-			iterator			old_end;
-			iterator			end;
-
-			this->resize(this->_size + (this->len_iterator(first, last)));
-			end = this->end();
-			position = this->begin() + int_pos;
-			old_end = this->begin() + end_inx;
-			while (old_end != position)
-				*--end = *--old_end;
-			while (first != last)
-				*position++ = *first++;
+			size_type len = position - this->begin();
+			size_type n = 0;
+			for (InputIterator tmp = first ; tmp != last && n <= this->max_size() ; tmp++)
+				n++;
+			if (_size + n > _capacity)
+			{
+				if (_size + n > _capacity * 2)
+					this->reserve(_size + n);
+				else if (_size >= 0){
+					if (_size == 0)
+						reserve(n);
+					this->reserve(_size * 2);
+				}
+				else
+					this->reserve(1);
+			}
+			for (size_type i = 0 ; i < n ; i++)
+				tmp.construct(_tab + _size + i, *first);
+			for (int i = _size - 1 ; i >= 0 && i >= (int)len ; i--)
+				_tab[i + n] = _tab[i];
+			for (size_type i = len ; i < len + n ; i++)
+				_tab[i] = *first++;
+			_size = _size + n;
 		}
 
 
