@@ -139,6 +139,8 @@ namespace ft
 		bool empty() const { return (_size == 0); }
 		void reserve (size_type n)
 		{
+			if (n > max_size())
+				throw std::length_error("vector::reserve");
 			value_type	*newtab;
 
 			if (n <= this->_capacity)
