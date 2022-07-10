@@ -22,6 +22,59 @@ void	printf_v(T & v, std::string name)
 int main()
 {
 	{
+	ft::vector<int>			test(3, 3);
+	std::cout << COLOR_TWO << "/--self assignation test--/" << COLOR_NO << std::endl;
+	ft::vector<ft::vector<int> >	self_assign;
+	ft::vector<ft::vector<int> >	*ptr = &self_assign;
+	ft::vector<ft::vector<int> >	*ptr2 = &self_assign;
+
+	self_assign.assign(4, test);
+	*ptr = *ptr2;
+
+	std::cout << std::boolalpha << (*ptr == *ptr2) << '\n';
+
+
+	ft::vector<ft::vector<int> > JOHN;
+	ft::vector<ft::vector<int> > BOB(5, test);
+	std::cout << "BOB(5, test(test, 5)) : \n";
+	for (size_t i = 0; i < BOB.size(); i++)
+	{
+		for (size_t j = 0; j < BOB[i].size(); j++)
+			std::cout << BOB[i][j] << ' ';
+		std::cout << '\n';
+	}
+	ft::vector<ft::vector<int> > MIKE(BOB);
+
+	// CTORs
+	std::cout << "\nCTORS\n";
+	std::cout << "Empty is empty ? " << std::boolalpha << JOHN.empty() << '\n';
+	std::cout << "BOB is empty? " << BOB.empty() << '\n';
+
+	std::cout << "Size of JOHN " << JOHN.size() << std::endl;
+	std::cout << "Size of BOB " << BOB.size() << std::endl;
+	std::cout << "Size of MIKE " << MIKE.size() << std::endl;
+
+	// RESIZE
+	size_t	bob_resize = 2;
+	std::cout << "\nRESIZE\n";
+	BOB.resize(bob_resize);
+	std::cout << "Size of JOHN " << JOHN.size() << std::endl;
+	if (JOHN.capacity() >= JOHN.size())
+		std::cout << "Capacity of JOHN is sufficient\n";
+	else
+		std::cerr << "THERE IS A PROBLEM ON LINE 53\n";
+	std::cout << "Size of BOB " << BOB.size() << std::endl;
+	if (BOB.capacity() >= bob_resize)
+		std::cout << "Capacity of BOB is sufficient\n";
+	else
+		std::cerr << "THERE IS A PROBLEM ON LINE 58\n";
+	std::cout << "Size of MIKE " << MIKE.size() << std::endl;
+	if (MIKE.capacity() >= MIKE.size())
+		std::cout << "Capacity of MIKE is sufficient\n";
+	else
+		std::cerr << "THERE IS A PROBLEM ON LINE 63\n";
+	}
+	{
 		// Create a vector containing integers
 		std::cout << COLOR_TWO << "/--test MAX_SIZE size capacity--/" << COLOR_NO << std::endl;
 		ft::vector<int>		m;
