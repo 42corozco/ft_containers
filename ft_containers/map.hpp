@@ -40,9 +40,6 @@ namespace	ft
 		typedef ft::RedBlack<key_type, value_type, ft::selectFirst<value_type, key_type>, key_compare> tree_type;
 		class value_compare;
 
-		void			arbolin() const	{ this->_tree.print(); } //borrar
-	// https://www.cs.usfca.edu/~galles/visualization/RedBlack.html ->pagina para ver los cambios
-
 	/*(constructor)*/
 		//empty (1)
 		explicit map(const key_compare &comp = key_compare(), const allocator_type &alloc = allocator_type()):
@@ -260,6 +257,11 @@ namespace	ft
 		allocator_type		_alloc;
 		key_compare			_comp;
 		tree_type			_tree;
+
+
+		void			arbolin() const	{ this->_tree.print(); } //borrar
+	// https://www.cs.usfca.edu/~galles/visualization/RedBlack.html ->pagina para ver los cambios
+
 
 	};
 	/***********************************************************************************************************************/
