@@ -1,4 +1,5 @@
 #include "vector.hpp"
+#include "map.hpp"
 #include <iostream>
 #include <vector>
 
@@ -6,7 +7,7 @@
 #define COLOR_TWO	"\033[33m"
 #define COLOR_NO	"\033[0m"
 
-	template < typename T >
+template < typename T >
 void	printf_v(T & v, std::string name)
 {
 	std::cout << name << " = {";
@@ -19,8 +20,31 @@ void	printf_v(T & v, std::string name)
 	std::cout << "}; \n";
 }
 
+template <class Key, class T>
+void	print_m(ft::map<Key, T>& lst)
+{
+	for (typename ft::map<Key, T>::iterator it = lst.begin(); it != lst.end(); it++)
+		std::cout << it->first << " => " << it->second << '\n';
+}
+
 int main()
 {
+	{
+		ft::pair<int, std::string>	my_pair(8, "salut");
+		ft::map<int, std::string>	test;
+		ft::map<int, std::string>::iterator	it;
+
+		test.insert(my_pair);
+		test.insert(ft::pair<int, std::string>(-4, "bar"));
+		test.insert(ft::pair<int, std::string>(2, "machin"));
+		test.insert(ft::pair<int, std::string>(3, "foo"));
+		test.insert(ft::pair<int, std::string>(746, "Marcel"));
+		test.insert(ft::pair<int, std::string>(1, "truc"));
+		it = test.begin();
+		test.arbolin();
+		std::cout << '\n';
+	}
+/*
 	{
 	ft::vector<int>			test(3, 3);
 	std::cout << COLOR_TWO << "/--self assignation test--/" << COLOR_NO << std::endl;
@@ -471,5 +495,6 @@ int main()
 		printf_v(vct, "vct");
 		printf_v(vct2, "vct2");
 	}
+	*/
 	return (0);
 }

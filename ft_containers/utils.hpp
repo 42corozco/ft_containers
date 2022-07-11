@@ -80,7 +80,7 @@ namespace ft
 	};
 	/**********[finlexicographical_compare]**********/
 
-	template <class Input, class Output>
+	template <class Input, class Output> //recibe algo -> devuelve ejemplo std::unary_function<int,bool>  recibe int y devuelve un bool
 	struct selectFirst : public std::unary_function<Input, Output>
 	{
 		const Output &operator()(const Input &x) const
